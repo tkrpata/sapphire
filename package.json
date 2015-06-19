@@ -2,6 +2,9 @@
   "name": "sapphire",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node" : "0.12.3"
+  },
   "scripts": {
     "start": "node ./bin/www"
   },
