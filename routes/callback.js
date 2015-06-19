@@ -5,7 +5,7 @@ router.post('/', function(req, res, next) {
     var db = req.db;
     var collection = db.get('sapphire');
     var input = JSON.parse(req.body);
-    collection.insert(input.plain, function(err, result){
+    collection.insert(input, function(err, result){
         res.send(
             (err === null) ? { msg: '' } : { msg: err }
         );
