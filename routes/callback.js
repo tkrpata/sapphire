@@ -38,18 +38,20 @@ router.post('/', function(req, res, next) {
           lat = obj.results[0].geometry.location.lat;
           lng = obj.results[0].geometry.location.lng;
           console.log(lat + "," + lng);
-          
+
+          // Just putting this here for now, it really doesn't go here
+          var entry = { 'date': date, 'player': frog, 'portal': portal, 'address': address, 'lat':lat, 'lng':lng };
+    
+          collection.insert(entry, function(err, result){
+            res.send(
+              (err === null) ? { msg: '' } : { msg: err }
+            );
+          });
+    
         }
       })
 
-      var entry = { 'date': date, 'player': frog, 'portal': portal, 'address': address, 'lat':lat, 'lng':lng };
-    
-      collection.insert(entry, function(err, result){
-        res.send(
-            (err === null) ? { msg: '' } : { msg: err }
-        );
-      });
-    } else if (subject.match("Forwarding Confirmation")) {
+          } else if (subject.match("Forwarding Confirmation")) {
       console.log(subject);
       res.send();
     } else {
