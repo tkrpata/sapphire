@@ -33,7 +33,7 @@ router.post('/', function(req, res, next) {
             (err === null) ? { msg: '' } : { msg: err }
         );
       });
-    } else if (subject.match("Gmail Forwarding Confirmation")) {
+    } else if (subject.match("Forwarding Confirmation")) {
       console.log(subject);
     } else {
       console.log("Got an unknown message type from " + req.body.headers.From)
