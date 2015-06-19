@@ -5,7 +5,29 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     var db = req.db;
     var collection = db.get('sapphire');
-    collection.find({},{},function(e,docs){
+    var query = {};
+    if(req.query.player) {
+      query.player = req.query.player;
+    }
+    if(req.query.portal) {
+      query.portal = req.query.portal;
+    }
+
+    if(req.query.start) {
+      query.date = {};
+      start = new Date(req.query.start);
+      query.date.$gte = start;
+    }
+
+    if(req.query.end) {
+      query.date = {};
+      end = new Date(req.query.end);
+      query.date.$gte = end;
+    }
+
+    console.log(query);
+
+    collection.find(query,{},function(e,docs){
         res.json(docs);
     });
 });
