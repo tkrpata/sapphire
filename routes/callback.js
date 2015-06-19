@@ -12,7 +12,8 @@ router.post('/', function(req, res, next) {
 
     if(subject.match("Damage Report")) {
       var re = /Date: (.*?)$/gm;
-      var date = re.exec(content)[1];
+      var strdate = re.exec(content)[1];
+      var date = Date(date.replace(" at",""));
       console.log(date);
 
       var re = /attacked by (.*?)$/gm;
