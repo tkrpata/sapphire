@@ -38,6 +38,7 @@ router.post('/', function(req, res, next) {
     } else {
       console.log("Got an unknown message type from " + req.body.headers.From)
     }
+    res.send();
 });
 
 module.exports = router;
