@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
     if(req.query.end) {
       query.date = {};
       end = new Date(req.query.end);
-      query.date.$gte = end;
+      query.date.$lte = end;
     }
 
     console.log(query);
