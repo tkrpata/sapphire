@@ -6,9 +6,9 @@ router.post('/', function(req, res, next) {
     var collection = db.get('sapphire');
 
     var content = req.body.plain;
-    console.log(content);
+    //console.log(content);
 
-    var subject = req.headers.Subject;
+    var subject = req.body.headers.Subject;
 
     if(subject.match("Damage Report")) {
       var re = /Date: (.*?)$/gm;
@@ -36,7 +36,7 @@ router.post('/', function(req, res, next) {
     } else if (subject.match("Gmail Forwarding Confirmation")) {
       console.log(subject);
     } else {
-      console.log("Got an unknown message type from " + req.headers.From)
+      console.log("Got an unknown message type from " + req.body.headers.From)
     }
 });
 
