@@ -7,26 +7,31 @@ router.post('/', function(req, res, next) {
     var collection = db.get('sapphire');
 
     var content = req.body.plain;
-    //console.log(content);
-
     var subject = req.body.headers.Subject;
 
     if(subject.match("Damage Report")) {
-      var re = /Date: (.*?)$/gm;
-      var strdate = re.exec(content);
-      var date = new Date(strdate.replace(" at",""));
-      console.log(date);
 
-      var re = /attacked by (.*?)$/gm;
-      var frog = re.exec(content);
-      console.log(frog);
+      console.log(subject);
 
-      var re = /DAMAGE REPORT\n(.*?)\n(.*?)\n/gm;
+      //var re = /Date: (.*?)$/gm;
+      //var strdate = re.exec(content);
+      //var date = new Date(strdate.replace(" at",""));
+
+      var date = new Date(req.body.headers.Date);
+      console.log("Date: " + date);
+
+      console.log(content);
+
+      var re = /ed by (.*?)$/gm;
+      var frog = re.exec(subject)[1];
+      console.log("Frog: " + frog);
+
+      var re = /DAMAGE REPORT[\s]+(.*?)\n[\s](.*?)\n/gm;
       var location = re.exec(content);
       var portal = location[1];
       var address = location[2];
-      console.log(portal);
-      console.log(address);
+      console.log("Portal: " + portal);
+      console.log("Address: " + address);
 
       var geocode_url = "http://maps.google.com/maps/api/geocode/json?address=" + encodeURIComponent(address) + "&sensor=false";
       var lat = 0.0;
