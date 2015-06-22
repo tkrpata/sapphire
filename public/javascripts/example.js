@@ -3,6 +3,8 @@ $.getJSON("/", function(data) {
     labels : [],
     datasets : [
       {
+        fillColor : "rgba(47, 162, 59, 1)",
+        strokeColor : "rgba(33, 115, 41, 1)",
         data : []
       }
     ]
@@ -13,12 +15,18 @@ $.getJSON("/", function(data) {
     tmpData[v.player] ? tmpData[v.player]++ : tmpData[v.player] = 1;
   });
 
-  $.each(tmpData, function(k,v) {
-    console.log(k);
-    console.log(v);
-    chartData.labels.push(k);
-    chartData.datasets[0].data.push(v);
+  // there has got to be a better way to do this
+  var sortable = [];
+  for (var player in tmpData) {
+    sortable.push([player,tmpData[player]]);
+  }
+  sortable.sort(function(a, b) {return b[1] - a[1]})
+  $.each(sortable, function(k,v) {
+    chartData.labels.push(v[0]);
+    chartData.datasets[0].data.push(v[1]);
   });
+  // end mess
+
   var chart = document.getElementById('chart').getContext('2d');
   new Chart(chart).Bar(chartData);
 });
