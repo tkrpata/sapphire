@@ -13,7 +13,6 @@ $(document).ready(function(){
 
     // alphabetize and add to dropdown
     $.each(Object.keys(menu).sort(), function(v,k) {
-      console.log(k);
       $('#portal')
          .append($("<option></option>")
          .attr("value",k)
@@ -26,6 +25,7 @@ $(document).ready(function(){
 
     // get the json data
     $.getJSON("/?portal=" + encodeURIComponent($('#portal').val()), function(data) { 
+
 
       // blank boilerplate chart data - fill options here
       chartData = {
@@ -41,6 +41,8 @@ $(document).ready(function(){
 
       var tmpData = { }
       $.each(data, function(k,v) {
+        console.log(v.address);
+        $('#portalInfo').text(v.address);
         tmpData[v.player] ? tmpData[v.player]++ : tmpData[v.player] = 1;
       });
 

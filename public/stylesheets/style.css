@@ -6,3 +6,8 @@ body {
 a {
   color: #00B7FF;
 }
+
+#portalInfo {
+  color: #999999;
+  font-style: italic;
+}

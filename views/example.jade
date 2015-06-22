@@ -6,8 +6,10 @@ block content
     form(id='portalSelect')
       select(id='portal',name='portal')
       input(type='submit')
-  div(id='chart-ontainer')
-    canvas#chart(width='640', height='480')
+  div
+    h3#portalInfo
+  div(id='chart-container')
+    canvas#chart(width='800', height='400')
   script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js")
   script(src="javascripts/Chart.min.js")
   script(src="javascripts/example.js")
