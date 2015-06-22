@@ -12,6 +12,7 @@ var db = monk(process.env.MONGOHQ_URL);
 
 var routes = require('./routes/index');
 var callback = require('./routes/callback');
+var example = require('./routes/example');
 
 var app = express();
 
@@ -35,6 +36,7 @@ app.use(function(req,res,next){
 
 app.use('/', routes);
 app.use('/callback', callback);
+app.use('/example',example);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
