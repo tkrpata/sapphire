@@ -1,13 +1,13 @@
 extends layout
 
 block content
-  h1= "Example" 
+  h2= "Sapphire - Example client" 
   div
     form(id='portalSelect')
-      input(type='text', id='portal', value='Severe Cartoon Damage', size='60')
+      select(id='portal',name='portal')
       input(type='submit')
-  div
-    canvas#chart(width='600', height='400')
+  div(id='chart-ontainer')
+    canvas#chart(width='640', height='480')
   script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js")
   script(src="javascripts/Chart.min.js")
   script(src="javascripts/example.js")

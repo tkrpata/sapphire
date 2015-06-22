@@ -1,11 +1,34 @@
 $(document).ready(function(){
-  console.log('jq ready function');
+  
+  var theChart;
+
+  // populate dropdown
+  $.getJSON("/", function(data) {
+    var menu = {};
+
+    // dedup portal names
+    $.each(data, function(k,v) {
+      menu[v.portal] = 1;
+    });
+
+    // alphabetize and add to dropdown
+    $.each(Object.keys(menu).sort(), function(v,k) {
+      console.log(k);
+      $('#portal')
+         .append($("<option></option>")
+         .attr("value",k)
+         .text(k)); 
+    });
+  });
+
   $('#portalSelect').on('submit', function(e) {
     e.preventDefault();
-    console.log('submitted');
+
+    // get the json data
     $.getJSON("/?portal=" + encodeURIComponent($('#portal').val()), function(data) { 
-      console.log(data);
-      var chartData = {
+
+      // blank boilerplate chart data - fill options here
+      chartData = {
         labels : [],
         datasets : [
           {
@@ -32,10 +55,13 @@ $(document).ready(function(){
         chartData.datasets[0].data.push(v[1]);
       });
       // end mess
+    
+      // little hacky to work around chartjs bug(?) 
+      if(theChart) { theChart.destroy(); }
+      var ctx = $("#chart").get(0).getContext("2d");
+      theChart = new Chart(ctx).Bar(chartData);
 
-      var chart = document.getElementById('chart').getContext('2d');
-      new Chart(chart).Bar(chartData);
     });
   });
-  $("#portalSelect").submit();
+
 });
